@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<div class="addsite-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-8 mx-auto">
+                <div class="add-site-box form-group">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Site Name</span>
+                            <input type="text" name="name" placeholder="Enter Site Name" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Site Place</span>
+                            <input type="text" name="place" placeholder="Enter Site Place" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Site Description</span>
+                            <input type="text" name="description" placeholder="Enter Site Description"
+                                class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Site Rate (1-5)</span>
+                            <input type="text" name="rate" placeholder="Enter Site Rate"
+                                class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Duration</span>
+                            <input type="text" name="duration" placeholder="Enter Recomended Duration"
+                                class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Lower Price</span>
+                            <input type="text" name="lower_price" placeholder="Enter Site Ticket Lower Price"
+                                class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Higher Price</span>
+                            <input type="text" name="higher_price" placeholder="Enter Site Ticket Higher Price"
+                                class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Site Map Link</span>
+                            <input type="text" name="map_link" placeholder="Enter Site Map Link" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Contact URL</span>
+                            <input type="text" name="contact_url" placeholder="Enter Contact URL" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Contact Name</span>
+                            <input type="text" name="contact_name" placeholder="Enter Contact Name" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Open Time</span>
+                            <input type="text" name="open_hours" placeholder="Enter Open Time" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="inputGroup-sizing-lg">Close Time</span>
+                            <input type="text" name="close_hours" placeholder="Enter Close Time" class="form-control"
+                                aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+                        </div>
+
+
+
+                            
+
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">Upload First Image</label>
+                            <input type="file" name="first_image" class="form-control" id="inputGroupFile01">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">Upload Second Image</label>
+                            <input type="file" name="second_image" class="form-control" id="inputGroupFile01">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">Upload Third Image</label>
+                            <input type="file" name="third_image" class="form-control" id="inputGroupFile01">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">Upload Fourth Image</label>
+                            <input type="file" name="fourth_image" class="form-control" id="inputGroupFile01">
+                        </div>
+
+
+
+
+
+
+                        <div class="col-12 w-100">
+                            <button type="submit" class="btn btn-primary bg-success w-100">Submit</button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

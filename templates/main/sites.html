@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}اكتشف - المواقع
+{% endblock title %}
+
+
+
+{% block content %}
+
+<body>
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0 ">
+        <div class="container-lg position-relative p-0 px-lg-3 " style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 text-primary"><span class="text-dark">ا</span>ك<span class="text-dark">تشف</span></h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="{% url 'main-page:main' %}" class="nav-item nav-link ">الرئيسية</a>
+                        <a href="{% url 'main-page:about-page' %}" class="nav-item nav-link ">من نحن</a>
+                        <a href="{% url 'main-page:sites-page' %}" class="nav-item nav-link active">المواقع</a>
+                        {% if user.is_authenticated %}
+                        <a href="#"></a>
+                        {% else %}
+                        <a href="{% url 'accounts:signup' %}" class="nav-item nav-link">انشاء حساب</a>
+                        <a href="{% url 'login' %}" class="nav-item nav-link">تسجيل دخول</a>
+                        {% endif %}
+                        <div class="nav-item dropdown">
+                            {% if user.is_authenticated %}
+                            <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">حسابي</a>
+                            {% else %}
+                            <a href="#"></a>
+                            {% endif %}
+                            <div class="dropdown-menu border-0 rounded-0 m-0">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'accounts:profile' %}" class="dropdown-item">حسابي</a>
+                                <a href="{% url 'logout' %}" class="dropdown-item">تسجيل خروج</a>
+                                {% else %}
+                                <a href="#"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+    <!-- Header Start -->
+    <div class="container-fluid page-header">
+        <div class="container">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+                <h3 class="display-4 text-white text-uppercase">المواقع</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'main-page:main' %}" style="font-size: 20px;">الرئيسية</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase" style="font-size: 20px;">المواقع</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+
+
+
+    <!-- Sites Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="font-size: 30px;">المواقع</h6>
+                <h1 style="font-size: 50px;">افضل المواقع</h1>
+            </div>
+            <div class="row">
+
+                {% for x in site %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="package-item site-box bg-white mb-2">
+                        <div class="site-card-image">
+                            {% if x.first_image %}
+                            <img class="card-photo" src="{{x.first_image.url}}">
+                            {% else %}
+                            <img class="card-photo" src="{% static 'img/default-image-photo.png' %}">
+                            {% endif %}
+                        </div>
+                        <div class="p-4 text-end">
+                            <div class="d-flex justify-content-between mb-3">
+                                <small class="m-0" style="font-size: 20px;" ><i class="fa fa-map-marker-alt text-primary mr-2" style="font-size: 15px;"></i>{{x.place}}</small>
+
+                            </div>
+                            <a class="h5 text-decoration-none" href="{{x.slug}}" style="font-size: 28px;">{{x.arabic_name}}</a>
+                            <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="m-0"><i class="fa fa-star text-primary mr-2"></i>{{x.rate}}
+                                    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Sites End -->
+
+
+
+
+
+
+</body>
+
+
+{% endblock content %}

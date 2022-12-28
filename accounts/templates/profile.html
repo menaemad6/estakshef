@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}اكتشف - حسابي
+{% endblock title %}
+
+
+{% block content %}
+
+<body>
+
+    {% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+    {% endif %}
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0 ">
+        <div class="container-lg position-relative p-0 px-lg-3 " style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 text-primary"><span class="text-dark">ا</span>ك<span class="text-dark">تشف</span></h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="{% url 'main-page:main' %}" class="nav-item nav-link ">الرئيسية</a>
+                        <a href="{% url 'main-page:about-page' %}" class="nav-item nav-link">من نحن</a>
+                        <a href="{% url 'main-page:sites-page' %}" class="nav-item nav-link">المواقع</a>
+                        {% if user.is_authenticated %}
+                        <a href="#"></a>
+                        {% else %}
+                        <a href="{% url 'accounts:signup' %}" class="nav-item nav-link">انشاء حساب</a>
+                        <a href="{% url 'login' %}" class="nav-item nav-link">تسجيل دخول</a>
+                        {% endif %}
+                        <div class="nav-item dropdown">
+                            {% if user.is_authenticated %}
+                            <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown">حسابي</a>
+                            {% else %}
+                            <a href="#"></a>
+                            {% endif %}
+                            <div class="dropdown-menu border-0 rounded-0 m-0">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'accounts:profile' %}" class="dropdown-item">حسابي</a>
+                                <a href="{% url 'logout' %}" class="dropdown-item">تسجيل خروج</a>
+                                {% else %}
+                                <a href="#"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+
+
+    <!-- Profile Start  -->
+
+    <div class="container emp-profile">
+
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        {% if user.profile.image %}
+                        <img src="{{user.profile.image.url}}" class="d-block w-100">
+                        {% else %}
+                        <img src="{% static 'img/default-profile-image.jpg' %}">
+                        {% endif %}
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5 class="mt-2">
+                            {{user.profile.user}}
+                        </h5>
+                        <p class="proile-rating" style="font-size: 17px;">عضو منذ: <span>
+                                {{user.profile.join_date|date:"SHORT_DATE_FORMAT"}}</span></p>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                    aria-controls="home" aria-selected="true">معلومات الحساب</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="col-md-2">
+                    <a href="{% url 'accounts:edit-profile' %}" class="btn btn-primary w-100">تعديل الحساب</a>
+                    <a href="{% url 'password_change' %}" class="btn btn-warning mt-3 pr-1 pt-1 pl-1 pb-1 w-100">تغير كلمة السر</a>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="profile-work">
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>اسم المستحدم</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if user.profile.user %}
+                                    <p>{{user.profile.user}}</p>
+                                    {% else %}
+                                    <p></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>الاسم كامل</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if user.profile.name %}
+                                    <p>{{user.profile.name}}</p>
+                                    {% else %}
+                                    <p></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>البريد الالكتروني</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if user.email %}
+                                    <p>{{user.email}}</p>
+                                    {% else %}
+                                    <p></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>رقم الهاتف</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if user.profile.phone %}
+                                    <p>{{user.profile.phone}}</p>
+                                    {% else %}
+                                    <p></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>الدولة</label>
+                                </div>
+                                <div class="col-md-6">
+                                    {% if user.profile.country %}
+                                    <p>{{user.profile.country}}</p>
+                                    {% else %}
+                                    <p></p>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+
+                        </div>
+                          
+                        </div>
+                        <a href="{% url 'logout' %}" class="btn btn-danger mt-3 w-100">تسجيل خروج</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+
+    <!-- Profile End  -->
+
+
+</body>
+
+{% endblock content %}

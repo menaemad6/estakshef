@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}اكتشف - تسجيل دخول
+{% endblock title %}
+
+{% block content %}
+
+<body>
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0 ">
+        <div class="container-lg position-relative p-0 px-lg-3 " style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="m-0 text-primary"><span class="text-dark">ا</span>ك<span class="text-dark">تشف</span></h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="{% url 'main-page:main' %}" class="nav-item nav-link">الرئيسية</a>
+                        <a href="{% url 'main-page:about-page' %}" class="nav-item nav-link">من نحن</a>
+                        <a href="{% url 'main-page:sites-page' %}" class="nav-item nav-link">المواقع</a>
+                        {% if user.is_authenticated %}
+                        <a href="#"></a>
+                        {% else %}
+                        <a href="{% url 'accounts:signup' %}" class="nav-item nav-link">انشاء حساب</a>
+                        <a href="{% url 'login' %}" class="nav-item nav-link active">تسجيل دخول</a>
+                        {% endif %}
+                        <div class="nav-item dropdown">
+                            {% if user.is_authenticated %}
+                            <a href="#" class="nav-link dropdown-toggle " data-toggle="dropdown">حسابي</a>
+                            {% else %}
+                            <a href="#"></a>
+                            {% endif %}
+                            <div class="dropdown-menu border-0 rounded-0 m-0">
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'accounts:profile' %}" class="dropdown-item">حسابي</a>
+                                <a href="{% url 'logout' %}" class="dropdown-item">تسجيل خروج</a>
+                                {% else %}
+                                <a href="#"></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+
+
+    <!-- Header Start -->
+    <div class="container-fluid page-header">
+        <div class="container">
+            <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 400px">
+                <h3 class="display-4 text-white text-uppercase">تسجيل دخول</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="{% url 'main-page:main' %}" style="font-size: 20px;">الرئيسية</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase" style="font-size: 20px;">تسجيل دخول</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+
+
+
+
+
+    <!-- Signup Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="font-size: 30px;" >تسجيل دخول</h6>
+                <h1 style="font-size: 50px;">سجل</h1>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-white" style="padding: 30px;">
+                        <div id="success"></div>
+
+
+
+
+                        {% if form.errors %}
+                            <p>Your username and password didn't match. Please try again.</p>
+                            {% endif %}
+                        
+                            {% if next %}
+                                {% if user.is_authenticated %}
+                                <p>Your account doesn't have access to this page. To proceed,
+                                please login with an account that has access.</p>
+                                {% else %}
+                                <p>Please login to see this page.</p>
+                                {% endif %}
+                            {% endif %}
+                        
+                            <!-- <form method="post" action="{% url 'login' %}">
+                            {% csrf_token %}
+                            <table>
+                            <tr>
+                                <td>{{ form.username.label_tag }}</td>
+                                <td>{{ form.username }}</td>
+                            </tr>
+                            <tr>
+                                <td class="mt-3">{{ form.password.label_tag }}</td>
+                                <td>{{ form.password }}</td>
+                            </tr>
+                            </table>
+                        
+                            <input type="submit" value="login" class="btn-primary btn w-100 mt-3">
+                            <input type="hidden" name="next" value="{{ next }}">
+                            </form> -->
+                        
+
+
+
+
+
+                        <form method="post" >
+
+                            {% csrf_token %}
+
+                            <div class="control-group">
+                                <input type="text" class="form-control p-4" id="subject" placeholder="Username"
+                                    required id="id_username" name="username" data-validation-required-message="Enter Your Username" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+                            <div class="control-group">
+                                <input type="password" class="form-control p-4" id="subject" placeholder="Password"
+                                    required id="id_password" name="password" data-validation-required-message="Enter Your Password" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-primary py-3 px-4 w-100" type="submit" id="sendMessageButton">سجل</button>
+                            </div>
+                        </form>
+
+
+                        {# Assumes you setup the password_reset view in your URLconf #}
+                        <p><a href="{% url 'password_reset' %}" class="btn btn-danger w-100 mt-3">نسيت كلمة السر؟</a></p>
+
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sign End -->
+
+
+</body>
+
+{% endblock content %}
